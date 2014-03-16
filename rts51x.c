@@ -85,7 +85,6 @@ struct scsi_host_template rts51x_host_template = {
 	
 	.name =				RTS51X_NAME,
 	.proc_name =			RTS51X_NAME,
-	.proc_info =			proc_info,
 	.info =				rts5139_info,
 
 	
