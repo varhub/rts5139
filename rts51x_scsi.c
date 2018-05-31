@@ -343,10 +343,12 @@ static int inquiry(struct scsi_cmnd *srb, struct rts51x_chip *chip)
 
 	if (sendbytes > 8) {
 		memcpy(buf, inquiry_buf, 8);
-		memcpy(buf + 8, inquiry_string,	sendbytes - 8);
-		if (pro_formatter_flag) {
-			buf[4] = 0x33;		
-		}
+		if(sendbytes - 8 <= strlen(inquiry_string))
+			memcpy(buf + 8, inquiry_string, sendbytes - 8);
+		else
+			memcpy(buf + 8, inquiry_string, strlen(inquiry_string));
+		if (pro_formatter_flag)
+			buf[4] = 0x33;
 	} else {
 		memcpy(buf, inquiry_buf, sendbytes);
 	}
